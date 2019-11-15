@@ -1,6 +1,6 @@
 # PQPCalc
 
-PHP-Website to calculate United's PQP from 2020
+PHP-Website to calculate United's PQP earnings from 2020
 
 
 Created by: nubbeldupp  
