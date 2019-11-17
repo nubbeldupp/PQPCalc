@@ -29,10 +29,12 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				$arr = htmlspecialchars($_POST['arrival' . $i]);
 				$car = htmlspecialchars($_POST['carrier' . $i]);
 				$fcl = htmlspecialchars($_POST['fareclass' . $i]);
-
-				$qper = "SELECT percent FROM fareclasses where carrier = '" . $car . "' and fareclass = '" . $fcl . "'";
-				$result = mysqli_query($con,$qper);
-				while($row = mysqli_fetch_array($result))
+				
+				$qper = $con->prepare("SELECT percent FROM fareclasses WHERE carrier = ? AND fareclass = ?");
+				$qper->bind_param("ss", $car, $fcl); // ss = String, String
+				$qper->execute();
+				$result = $statement->get_result();
+				while($row = $result->fetch_assoc())
 				{
 				  $per = $row['percent'];
 				}
