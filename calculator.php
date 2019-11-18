@@ -1,5 +1,5 @@
 <?php
-include 'database.php';
+include './database.php';
 
 
 
@@ -7,7 +7,8 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 	?>
 		<div class='col-md-12' style='display: inline-block'>
 			<div class='table-responsive'>
-			<table class="table w-auto table-hover" data-toggle="table" data-page-size="10">
+			<form method="POST" action="http://pqp-calc.com/index.php?page=calculator">
+			<table id="table" data-toggle="table" data-page-size="10">
 				<thead class='thead-dark'>
 				    <tr>
 				    	<th data-field='departure'>Depature</th>
@@ -35,8 +36,8 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				$qper->execute();
 				$qper->bind_result($row);
 				while ($qper->fetch()) {
-					$per = $row;
-				}
+			        $per = $row;
+			    }
 				$qper->close();
 
 
@@ -45,8 +46,8 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				$qdiv->execute();
 				$qdiv->bind_result($row);
 				while ($qdiv->fetch()) {
-			        	$div = $row;
-			    	}
+			        $div = $row;
+			    }
 				$qdiv->close();
 
 				$curl = curl_init("http://www.gcmap.com/dist?P=" . $dep . "-" . $arr);
@@ -75,15 +76,59 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				${"pqp$i"} = $dist * $per / $div;
 				${"pqp$i"} = round(${"pqp$i"});
 				echo "<tr>";
-			    echo '<td>' . $dep . '</td>';
-			    echo '<td>' . $arr . '</td>';
-			    echo '<td>' . $car . '</td>';
-			    echo '<td>' . $fcl . '</td>';
+				echo '<td><input type="text" name="departure' . $i . '" value="' . $dep . '" maxlength="4" minlength="3" size="15"></td>';
+
+			    echo '<td><input type="text" name="arrival' . $i . '" value="' . $arr . '" maxlength="4" minlength="3" size="15"></td>';
+
+			    echo '<td><select name="carrier' . $i . '">';
+				echo '<option value="' . $car . '">' . $car . '</option>';
+				$result = mysqli_query($con,"SELECT carrier FROM dividend");
+				while($row = mysqli_fetch_array($result))
+				{
+				  echo '<option value="' . $row['carrier'] . '">' . $row['carrier'] . '</option>';
+				}
+				echo '</select></td>';
+
+
+			    echo '<td><select name="fareclass' . $i . '">';
+				echo '<option value="' . $fcl . '">' . $fcl . '</option>';
+				$result = mysqli_query($con,"SELECT distinct fareclass FROM fareclasses ORDER BY fareclass");
+				while($row = mysqli_fetch_array($result))
+				{
+				  echo '<option value="' . $row['fareclass'] . '">' . $row['fareclass'] . '</option>';
+				}
+				echo '</select></td>';
+
 			    echo '<td>' . $per . '</td>';
 			    echo '<td>' . $dist . '</td>';
 			    echo '<td>' . ${"pqp$i"} . '</td>';
 			    echo '</tr>';
 			}else{
+				echo "<tr>";
+				echo '<td><input type="text" name="departure' . $i . '" value="" placeholder="eg. FRA or EDDF" maxlength="4" minlength="3" size="15"></td>';
+				echo '<td><input type="text" name="arrival' . $i . '" value="" placeholder="eg. EWR or KEWR" maxlength="4" minlength="3" size="15"></td>';
+
+				echo '<td><select name="carrier' . $i . '">';
+				echo '<option value="Carrier">Carrier</option>';
+				$result = mysqli_query($con,"SELECT carrier FROM dividend");
+				while($row = mysqli_fetch_array($result))
+				{
+				  echo '<option value="' . $row['carrier'] . '">' . $row['carrier'] . '</option>';
+				}
+				echo '</select></td>';
+
+				echo '<td><select name="fareclass' . $i . '">';
+				echo '<option value="Fareclass">Fareclass</option>';
+				$result = mysqli_query($con,"SELECT distinct fareclass FROM fareclasses ORDER BY fareclass");
+				while($row = mysqli_fetch_array($result))
+				{
+				  echo '<option value="' . $row['fareclass'] . '">' . $row['fareclass'] . '</option>';
+				}
+				echo '</select></td>';
+				echo '<td></td>';
+				echo '<td></td>';
+				echo '<td></td>';
+				echo "</tr>";
 				${"pqp$i"} = 0;
 			}
 		$pqptotal = $pqptotal + ${"pqp$i"};
@@ -102,6 +147,8 @@ echo '<td>' . $pqptotal . '</td>';
 echo '</tr>';
 echo '</tbody>';
 echo '</table>';
+echo '<button type="submit" class="btn btn-primary mt-1">Submit</button>   ';
+echo '</form>';
 echo '</div>';
 echo '</div>';
 
