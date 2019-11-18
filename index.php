@@ -9,7 +9,7 @@
 	V0.1 	Oct 20th 2019	First draft
 	V0.2 	Oct 22nd 2019	Added all airlines to database
 	V0.3	Oct 24th 2019	Added UA specialty fares to database
-	V0.4	Nov 18th 2019	Changed MySQL Queries to prevent SQL-Injection
+	V0.4	Nov 18th 2019	Changed MySQL Queries to prevent SQL-Injection and added htmlspecialchars() to prevent XXS
 -->
 <html>
 <head>
