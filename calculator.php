@@ -30,19 +30,24 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				$car = htmlspecialchars($_POST['carrier' . $i]);
 				$fcl = htmlspecialchars($_POST['fareclass' . $i]);
 
-				$qper = "SELECT percent FROM fareclasses where carrier = '" . $car . "' and fareclass = '" . $fcl . "'";
-				$result = mysqli_query($con,$qper);
-				while($row = mysqli_fetch_array($result))
-				{
-				  $per = $row['percent'];
-				}
+				$qper = $con->prepare("SELECT percent FROM fareclasses WHERE carrier = ? AND fareclass = ?");
+				$qper->bind_param("ss", $car, $fcl);
+				$qper->execute();
+				$qper->bind_result($row);
+				while ($qper->fetch()) {
+			        $per = $row;
+			    }
+				$qper->close();
 
-				$qdiv = "SELECT dividend FROM dividend where carrier = '" . $car . "'";
-				$result = mysqli_query($con,$qdiv);
-				while($row = mysqli_fetch_array($result))
-				{
-				  $div = $row['dividend'];
-				}
+
+				$qdiv = $con->prepare("SELECT dividend FROM dividend where carrier = ?");
+				$qdiv->bind_param("s", $car);
+				$qdiv->execute();
+				$qdiv->bind_result($row);
+				while ($qdiv->fetch()) {
+			        $div = $row;
+			    }
+				$qdiv->close();
 
 				$curl = curl_init("http://www.gcmap.com/dist?P=" . $dep . "-" . $arr);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
