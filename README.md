@@ -5,8 +5,8 @@ PHP-Website to calculate United's PQP earnings from 2020
 
 Created by: nubbeldupp  
 Date: Oct 20th 2019  
-Contact FT: https://www.flyertalk.com/forum/members/nubbeldupp.html  
-Contact VFT: https://www.vielfliegertreff.de/members/nubbeldupp-45497.html  
+Contact ENG: https://www.flyertalk.com/forum/members/nubbeldupp.html  
+Contact GER: https://www.vielfliegertreff.de/members/nubbeldupp-45497.html  
 
 Versioning:
 
