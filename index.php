@@ -11,6 +11,7 @@
 	V0.3	Oct 24th 2019	Added UA specialty fares to database
 	V0.4	Nov 18th 2019	Changed MySQL Queries to prevent SQL-Injection and added htmlspecialchars() to prevent XXS
 	V0.5	Nov 18th 2019	Added ICAO Airport codes
+	V0.6	Nov 18th 2019	Changed resulst be editable and submittable
 -->
 <html>
 <head>
