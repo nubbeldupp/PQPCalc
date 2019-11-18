@@ -35,8 +35,8 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				$qper->execute();
 				$qper->bind_result($row);
 				while ($qper->fetch()) {
-			        $per = $row;
-			    }
+					$per = $row;
+				}
 				$qper->close();
 
 
@@ -45,8 +45,8 @@ if(isset($_POST['carrier1']) && $_POST['carrier1'] != 'Carrier'){
 				$qdiv->execute();
 				$qdiv->bind_result($row);
 				while ($qdiv->fetch()) {
-			        $div = $row;
-			    }
+			        	$div = $row;
+			    	}
 				$qdiv->close();
 
 				$curl = curl_init("http://www.gcmap.com/dist?P=" . $dep . "-" . $arr);
