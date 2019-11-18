@@ -126,8 +126,8 @@ echo '</div>';
 	for ($i=1; $i <= 10; $i++) { 
 
 	echo "<tr>";
-	echo '<td><input type="text" name="departure' . $i . '" value="" placeholder="eg. FRA / EDDF" maxlength="4" minlength="3" size="14"></td>';
-	echo '<td><input type="text" name="arrival' . $i . '" value="" placeholder="eg. EWR / KEWR" maxlength="4" minlength="3" size="14"></td>';
+	echo '<td><input type="text" name="departure' . $i . '" value="" placeholder="eg. FRA or EDDF" maxlength="4" minlength="3" size="15"></td>';
+	echo '<td><input type="text" name="arrival' . $i . '" value="" placeholder="eg. EWR or KEWR" maxlength="4" minlength="3" size="15"></td>';
 
 	echo '<td><select name="carrier' . $i . '">';
 	echo '<option value="Carrier">Carrier</option>';
