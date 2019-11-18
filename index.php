@@ -28,6 +28,7 @@
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151909228-1"></script>
+	<!--
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
@@ -35,6 +36,7 @@
 
 	  gtag('config', 'UA-151909228-1');
 	</script>
+	-->
 	
 	<title>
 		UA PQP CALC
